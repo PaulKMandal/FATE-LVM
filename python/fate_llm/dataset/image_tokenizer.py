@@ -4,6 +4,8 @@ import pandas as pd
 from federatedml.nn.dataset.base import Dataset
 from federatedml.util import LOGGER
 from federatedml.nn.dataset.image import ImageDataset
+import torchvision.transforms as T
+import torch
 
 
 class TokenizerImageDataset(Dataset):
@@ -30,16 +32,27 @@ class TokenizerImageDataset(Dataset):
         self.file_suffix = file_suffix
         self.float64 = float64
         self.label_type = label_dtype
+        #resize dim
+        self.transform = T.Resize((224,224))
 
     #Need to edit. Also need to figure out how to incorporate collate_fn
     def __getitem__(self, item):
-
+        """
         if item < 0:
             item = len(self) + item
         if item < 0:
             raise IndexError('index out of range')
+        """
+        #resize dim
+        #self.dataset[] = self.transform(self.dataset[item][0])
+        
+        return (self.transform(self.dataset[item][0]), self.dataset[item][1])
 
-        return item
+    def collate_fn(self,batch):
+        return{
+              'pixel_values': torch.stack([x[0] for x in batch]),
+              'labels': torch.stack([x[1] for x in batch])
+        }
 
     def __len__(self):
         len_ = 0
