@@ -10,4 +10,4 @@ Use [FATE-LLM deployment packages](https://github.com/FederatedAI/FATE/wiki/Down
 
 ## Quick Start
 - [Federated ViT CIFAR-10 tutorial](./doc/tutorial/parameter_efficient_llm/ViT-example.ipynb)
-- [Federated DETR COCO tutorial][./doc/tutorial/parameter_efficient_llm/DETR.ipynb]
+- [Federated DETR COCO tutorial](./doc/tutorial/parameter_efficient_llm/DETR.ipynb)
